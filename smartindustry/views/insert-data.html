@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Industry</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+</head>
+<body>
+
+<div id="container" style="padding-left: 30px; padding-top: 30px;">
+
+    <h1>Give me some data daddy</h1>
+    <p>I want to feel your warm, gooey data deep inside my tight little database...</p>
+    <br>
+
+    <form id="insert_data" method="POST" action="/data/insert">
+
+        <select id="machine_id">
+            <option value="default_machine" disabled selected>Choose a machine</option>
+            <option value="machine_1">Machine 1</option>
+            <option value="machine_2">Machine 2</option>
+            <option value="machine_3">Machine 3</option>
+            <option value="machine_4">Machine 4</option>
+            <option value="machine_5">Machine 5</option>
+        </select>
+
+        <select id="sensor_id">
+            <option value="default_sensor" disabled selected>Choose a sensor</option>
+            <option value="sensor_temp">Temperature</option>
+            <option value="sensor_energy">Energy consumption</option>
+            <option value="sensor_pressure">Pressure</option>
+        </select>
+
+        <input type="number" name="value" step="any">
+        <input type="datetime-local" name="timestamp" step="1">
+        <input type="submit" value="Save data">
+
+    </form>
+
+    <br><br>
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+    $( "#insert_data" ).submit(function( event ) {
+
+        console.log('Begin inserting data with jQuery');
+
+        // Stop form from submitting normally
+        event.preventDefault();
+
+        // Get some values from elements on the page:
+        var $form = $( this ),
+            machine     = $form.find( "#machine_id" ).val(),
+            sensor      = $form.find( "#sensor_id" ).val(),
+            value       = $form.find( "input[name='value']" ).val(),
+            timestamp   = $form.find( "input[name='timestamp']" ).val(),
+            url = $form.attr( "action" );
+
+        // Send the data using post
+        var posting = $.post( url, {
+            machine     : machine,
+            sensor      : sensor,
+            value       : value,
+            timestamp   : timestamp
+        } );
+
+        // Put the results in a div
+        posting.done(function( result ) {
+            console.log('Successfully inserted data with jQuery');
+
+            var data = JSON.parse(result);
+
+            console.log(data);
+
+            $('#result').html('<p>You have successfully saved your data!</p>' +
+                '<div class="container-data">' +
+                    '<div class="row">' +
+                        '<div class="col-2">' +
+                            '<b>Machine</b>' +
+                        '</div>' +
+                        '<div class="col-2">' +
+                            data.machine +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row">' +
+                        '<div class="col-2">' +
+                            '<b>Sensor</b>' +
+                        '</div>' +
+                        '<div class="col-2">' +
+                            data.sensor +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row">' +
+                        '<div class="col-2">' +
+                            '<b>Value</b>' +
+                        '</div>' +
+                        '<div class="col-2">' +
+                            data.value +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="row">' +
+                        '<div class="col-2">' +
+                            '<b>Timestamp</b>' +
+                        '</div>' +
+                        '<div class="col-2">' +
+                            data.timestamp +
+                        '</div>' +
+                    '</div>' +
+                '</div>');
+        });
+    });
+
+</script>
+
+</body>
+</html>
