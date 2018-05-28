@@ -115,7 +115,7 @@ public class MCP3008JavaChannel0 {
         //     Thread.sleep(1000);
         // }
 
-        while (true) {
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
           System.out.println(input.getValue());
         }
 
@@ -124,6 +124,6 @@ public class MCP3008JavaChannel0 {
         // and background scheduled tasks)
         gpio.shutdown();
 
-        System.out.println("Exiting MCP3008GpioExample");
+       System.out.println("Exiting MCP3008GpioExample");
     }
 }
