@@ -71,7 +71,7 @@ public class MCP3008JavaChannel0 {
         //         gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0")
         // };
 
-        GpioPinAnalogInput input = gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0")
+        GpioPinAnalogInput input = gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0");
 
         // Define the amount that the ADC input conversion value must change before
         // a 'GpioPinAnalogValueChangeEvent' is raised.  This is used to prevent unnecessary
