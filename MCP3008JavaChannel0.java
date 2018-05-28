@@ -67,16 +67,17 @@ public class MCP3008JavaChannel0 {
 
         // Provision gpio analog input pins for all channels of the MCP3008.
         // (you don't have to define them all if you only use a subset in your project)
-        final GpioPinAnalogInput inputs[] = {
-                gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0")
-        };
+        // final GpioPinAnalogInput inputs[] = {
+        //         gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0")
+        // };
 
+        GpioPinAnalogInput input = gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0")
 
         // Define the amount that the ADC input conversion value must change before
         // a 'GpioPinAnalogValueChangeEvent' is raised.  This is used to prevent unnecessary
         // event dispatching for an analog input that may have an acceptable or expected
         // range of value drift.
-        provider.setEventThreshold(100, inputs); // all inputs; alternatively you can set thresholds on each input discretely
+        //provider.setEventThreshold(100, inputs); // all inputs; alternatively you can set thresholds on each input discretely
 
         // Set the background monitoring interval timer for the underlying framework to
         // interrogate the ADC chip for input conversion values.  The acceptable monitoring
@@ -85,33 +86,37 @@ public class MCP3008JavaChannel0 {
         // on a regular basis.  The higher this value the slower your application will get
         // analog input value change events/notifications.  Try to find a reasonable balance
         // for your project needs.
-        provider.setMonitorInterval(250); // milliseconds
+        //provider.setMonitorInterval(250); // milliseconds
 
         // Print current analog input conversion values from each input channel
-        for(GpioPinAnalogInput input : inputs){
-            System.out.println("<INITIAL VALUE> [" + input.getName() + "] : RAW VALUE = " + input.getValue());
-        }
+        // for(GpioPinAnalogInput input : inputs){
+        //     System.out.println("<INITIAL VALUE> [" + input.getName() + "] : RAW VALUE = " + input.getValue());
+        // }
+        //
+        // // Create an analog pin value change listener
+        // GpioPinListenerAnalog listener = new GpioPinListenerAnalog()
+        // {
+        //     @Override
+        //     public void handleGpioPinAnalogValueChangeEvent(GpioPinAnalogValueChangeEvent event)
+        //     {
+        //         // get RAW value
+        //         double value = event.getValue();
+        //
+        //         // display output
+        //         System.out.println("<CHANGED VALUE> [" + event.getPin().getName() + "] : RAW VALUE = " + value);
+        //     }
+        // };
+        //
+        // // Register the gpio analog input listener for all input pins
+        // gpio.addListener(listener, inputs);
+        //
+        // // Keep this sample program running for 10 minutes
+        // for (int count = 0; count < 600; count++) {
+        //     Thread.sleep(1000);
+        // }
 
-        // Create an analog pin value change listener
-        GpioPinListenerAnalog listener = new GpioPinListenerAnalog()
-        {
-            @Override
-            public void handleGpioPinAnalogValueChangeEvent(GpioPinAnalogValueChangeEvent event)
-            {
-                // get RAW value
-                double value = event.getValue();
-
-                // display output
-                System.out.println("<CHANGED VALUE> [" + event.getPin().getName() + "] : RAW VALUE = " + value);
-            }
-        };
-
-        // Register the gpio analog input listener for all input pins
-        gpio.addListener(listener, inputs);
-
-        // Keep this sample program running for 10 minutes
-        for (int count = 0; count < 600; count++) {
-            Thread.sleep(1000);
+        while (true) {
+          System.out.println(input.getValue);
         }
 
         // When your program is finished, make sure to stop all GPIO activity/threads by shutting
