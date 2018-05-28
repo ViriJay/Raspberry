@@ -123,6 +123,7 @@ public class MCP3008JavaChannel0 {
         // down the GPIO controller (this method will forcefully shutdown all GPIO monitoring threads
         // and background scheduled tasks)
         gpio.shutdown();
+        
 
        System.out.println("Exiting MCP3008GpioExample");
     }
