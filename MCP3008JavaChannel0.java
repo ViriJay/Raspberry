@@ -52,7 +52,7 @@ import com.pi4j.io.spi.SpiChannel;
  *
  * @author Christian Wehrli, Robert Savage
  */
-public class MCP3008GpioExample {
+public class MCP3008JavaChannel0 {
 
     public static void main(String args[]) throws Exception {
 
