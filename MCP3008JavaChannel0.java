@@ -116,7 +116,7 @@ public class MCP3008JavaChannel0 {
         // }
 
         while (true) {
-          System.out.println(input.getValue);
+          System.out.println(input.getValue());
         }
 
         // When your program is finished, make sure to stop all GPIO activity/threads by shutting
