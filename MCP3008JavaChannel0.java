@@ -35,6 +35,7 @@ import com.pi4j.io.gpio.GpioPinAnalogInput;
 import com.pi4j.io.gpio.event.GpioPinAnalogValueChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerAnalog;
 import com.pi4j.io.spi.SpiChannel;
+import java.lang.Thread;
 
 /**
  * <p>
@@ -117,6 +118,7 @@ public class MCP3008JavaChannel0 {
 
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
           System.out.println(input.getValue());
+	  Thread.sleep(1000);
         }
 
         // When your program is finished, make sure to stop all GPIO activity/threads by shutting
