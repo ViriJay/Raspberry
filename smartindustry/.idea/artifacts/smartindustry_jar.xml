@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="smartindustry:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/smartindustry_jar</output-path>
+    <root id="archive" name="smartindustry.jar">
+      <element id="module-output" name="smartindustry" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../kaa-java-ep-sdk-wi-15WFxMgFmicPpUace9zH4R0Q.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../slf4j-simple-1.7.21.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
