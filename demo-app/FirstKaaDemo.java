@@ -86,7 +86,7 @@ public class FirstKaaDemo {
      * Retrieves random temperature.
      */
     private static double getTemperatureRand() {
-        return new Random().nextDouble() + 420.0;
+        return new Random().nextDouble() + 33.0;
     }
 
     private static void onKaaStarted(long time) {
