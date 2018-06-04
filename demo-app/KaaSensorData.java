@@ -43,17 +43,24 @@ public class KaaSensorData {
     /*------------------------------ Pi4J Setup ------------------------------*/
 
     // Create gpio controller
-    static final GpioController gpio = GpioFactory.getInstance();
+    static GpioController gpio;
 
     // Create custom MCP3008 analog gpio provider
     // we must specify which chip select (CS) that that ADC chip is physically connected to.
-    static final AdcGpioProvider provider = new MCP3008GpioProvider(SpiChannel.CS0);
+    static AdcGpioProvider provider;
 
     static GpioPinAnalogInput input;
 
 
 
     public static void main(String[] args) {
+        gpio = GpioFactory.getInstance();
+
+        try {
+            provider = new MCP3008GpioProvider(SpiChannel.CS0);
+        } catch (IOException e) {
+            System.out.println("hey");
+        }
 
         input = gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0");
         /*------------------------------ Kaa Setup -------------------------------*/
