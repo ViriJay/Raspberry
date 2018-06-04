@@ -153,7 +153,7 @@ public class KaaSensorData {
         public void onStarted() {
             super.onStarted();
             LOG.info("Kaa client started");
-            Configuration configuration = kaaClient.getConfiguration()
+            Configuration configuration = kaaClient.getConfiguration();
             LOG.info("Default sample period: {}", configuration.getSamplePeriod());
             onKaaStarted(TimeUnit.SECONDS.toMillis(configuration.getSamplePeriod()));
         }
