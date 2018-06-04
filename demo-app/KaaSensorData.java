@@ -40,19 +40,22 @@ public class KaaSensorData {
     private static ScheduledFuture<?> scheduledFuture;
     private static ScheduledExecutorService scheduledExecutorService;
 
+    /*------------------------------ Pi4J Setup ------------------------------*/
+
+    // Create gpio controller
+    static final GpioController gpio = GpioFactory.getInstance();
+
+    // Create custom MCP3008 analog gpio provider
+    // we must specify which chip select (CS) that that ADC chip is physically connected to.
+    static final AdcGpioProvider provider = new MCP3008GpioProvider(SpiChannel.CS0);
+
+    static GpioPinAnalogInput input;
+
+
+
     public static void main(String[] args) {
-        /*------------------------------ Pi4J Setup ------------------------------*/
 
-        // Create gpio controller
-        final GpioController gpio = GpioFactory.getInstance();
-
-        // Create custom MCP3008 analog gpio provider
-        // we must specify which chip select (CS) that that ADC chip is physically connected to.
-        final AdcGpioProvider provider = new MCP3008GpioProvider(SpiChannel.CS0);
-
-        GpioPinAnalogInput input = gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0");
-
-
+        input = gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0");
         /*------------------------------ Kaa Setup -------------------------------*/
 
         LOG.info(FirstKaaDemo.class.getSimpleName() + " app starting!");
