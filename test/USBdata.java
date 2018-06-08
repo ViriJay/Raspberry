@@ -105,7 +105,7 @@ public class USBdata {
 
         }
         catch(IOException ex) {
-            console.println(" ==>> SERIAL SETUP FAILED : " + ex.getMessage());
+            System.out.println(" ==>> SERIAL SETUP FAILED : " + ex.getMessage());
             return;
         }
     }
