@@ -97,7 +97,7 @@ public class USBdata {
 
             // continuous loop to keep the program running until the user terminates the program
             while(true) {
-                System.out.println(serial.getInputStream());
+                System.out.println(serial.read());
 
                 // wait 1 second before continuing
                 Thread.sleep(1000);
