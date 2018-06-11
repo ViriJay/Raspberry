@@ -56,6 +56,9 @@ public class USBdata {
      * @throws InterruptedException
      * @throws IOException
      */
+
+     public static double value;
+
     public static void main(String args[]) throws InterruptedException, IOException {
 
         // !! ATTENTION !!
@@ -95,26 +98,27 @@ public class USBdata {
             // open the default serial device/port with the configuration settings
             serial.open(config);
 
-            // serial.addListener(new SerialDataEventListener() {
-            //   @Override
-            //   public void dataReceived(SerialDataEvent event) {
-            //
-            //       // NOTE! - It is extremely important to read the data received from the
-            //       // serial port.  If it does not get read from the receive buffer, the
-            //       // buffer will continue to grow and consume memory.
-            //
-            //       // print out the data received to the console
-            //       try {
-            //           System.out.println("[ASCII DATA] " + event.getAsciiString());
-            //       } catch (IOException e) {
-            //           e.printStackTrace();
-            //       }
-            //   }
-            // });
+            serial.addListener(new SerialDataEventListener() {
+              @Override
+              public void dataReceived(SerialDataEvent event) {
+
+                  // NOTE! - It is extremely important to read the data received from the
+                  // serial port.  If it does not get read from the receive buffer, the
+                  // buffer will continue to grow and consume memory.
+
+                  // print out the data received to the console
+                  try {
+                      //System.out.println("[ASCII DATA] " + event.getAsciiString());
+                      value = Double.parseDouble(event.getAsciiString());
+                  } catch (IOException e) {
+                      e.printStackTrace();
+                  }
+              }
+            });
 
             // continuous loop to keep the program running until the user terminates the program
             while(true) {
-                System.out.println(serial.getInputStream().read());
+                System.out.println(value);
 
                 // wait 1 second before continuing
                 Thread.sleep(1000);
