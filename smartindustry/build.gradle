@@ -87,7 +87,7 @@ task fatJar(type: Jar) {
   }
 
   from { locateJar('gson-2.6.2.jar') } {
-    include 'com/google/gson/**.*.class'
+    include 'com/google/gson/**/*'
   }
 
   with jar

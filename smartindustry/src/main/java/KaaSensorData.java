@@ -53,6 +53,10 @@ public class KaaSensorData {
     static GpioPinAnalogInput input1;
     static GpioPinAnalogInput input2;
 
+    /*JanitzaHelper setup*/
+
+    static JanitzaHelper jh = new JanitzaHelper("http://192.168.1.102/json.do?");
+
 
     public static void main(String[] args) {
         gpio = GpioFactory.getInstance();
@@ -129,8 +133,8 @@ public class KaaSensorData {
         return input2.getValue();
     }
 
-    private static double getApiValue() {
-      // new httpconnectionobjectding();
+    private static double getJanitzaPower() {
+        return jh.getDatas("_PLN");
     }
 
     private static void onKaaStarted(long time) {
@@ -147,12 +151,15 @@ public class KaaSensorData {
                         double input0Value = getInput0Value();
                         double input1Value = getInput1Value();
                         double input2Value = getInput2Value();
+                        double janitzaPower = getJanitzaPower();
                         kaaClient.addLogRecord(new DataCollection("1", "pot", input0Value));
                         kaaClient.addLogRecord(new DataCollection("1", "light", input1Value));
                         kaaClient.addLogRecord(new DataCollection("1", "temperature", input2Value));
+                        kaaClient.addLogRecord(new DataCollection("1", "power", janitzaPower));
                         LOG.info("Pot Value: {}", input0Value);
                         LOG.info("Light Value: {}", input1Value);
                         LOG.info("Temp Value: {}", input2Value);
+                        LOG.info("Power Value: {}", janitzaPower);
                     }
                 }, 0, time, TimeUnit.MILLISECONDS);
     }
@@ -170,12 +177,16 @@ public class KaaSensorData {
                         double input0Value = getInput0Value();
                         double input1Value = getInput1Value();
                         double input2Value = getInput2Value();
+                        double janitzaPower = getJanitzaPower();
                         kaaClient.addLogRecord(new DataCollection("1", "pot", input0Value));
                         kaaClient.addLogRecord(new DataCollection("1", "light", input1Value));
                         kaaClient.addLogRecord(new DataCollection("1", "temperature", input2Value));
+                        kaaClient.addLogRecord(new DataCollection("1", "power", janitzaPower));
                         LOG.info("Pot Value: {}", input0Value);
                         LOG.info("Light Value: {}", input1Value);
-                        LOG.info("Temp Value: {}", input2Value);                    }
+                        LOG.info("Temp Value: {}", input2Value);
+                        LOG.info("Power Value: {}", janitzaPower);
+                    }
                 }, 0, time, TimeUnit.MILLISECONDS);
     }
 

@@ -48,5 +48,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="kaa-java-ep-sdk-vqzIegV42yFnHGujHH8DqjWWyPE" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.6.2" level="project" />
   </component>
 </module>
