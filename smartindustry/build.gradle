@@ -80,7 +80,7 @@ task fatJar(type: Jar) {
     include 'com/pi4j/io/spi/SpiChannel.class'
   }
 
-  from { locateJar('pi4j-core.jar')} {
+  from { locateJar('pi4j-gpio-extension.jar')} {
     include 'com/pi4j/gpio/extension/base/AdcGpioProvider.class'
     include 'com/pi4j/gpio/extension/mcp/MCP3008GpioProvider.class'
     include 'com/pi4j/gpio/extension/mcp/MCP3008Pin.class'
