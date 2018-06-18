@@ -130,7 +130,7 @@ public class KaaSensorData {
     }
 
     private static double getApiValue() {
-      new httpconnectionobjectding();
+      // new httpconnectionobjectding();
     }
 
     private static void onKaaStarted(long time) {

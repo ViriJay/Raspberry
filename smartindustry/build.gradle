@@ -44,14 +44,54 @@ jar {
     }
 }
 
-task fatJarGPIO(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'KaaSensorData'
-    }
+def locateJar(lib) {
+   configurations.compile.findAll {it.getName().contains(lib)}.collect { it.isDirectory() ? it : zipTree(it) }
+}
 
-    baseName = project.name + '-GPIO-all'
-    from { configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}}
-    with jar
+// task fatJarGPIO(type: Jar) {
+//     manifest {
+//         attributes 'Main-Class': 'KaaSensorData'
+//     }
+//
+//     baseName = project.name + '-GPIO-all'
+//     from { configurations.compile.collect {it.isDirectory() ? it : zipTree(it)}}
+//     with jar
+// }
+
+task fatJar(type: Jar) {
+  manifest {
+    attributes 'Main-Class': 'KaaSensorData'
+  }
+
+  baseName = project.name
+
+  from { locateJar('kaa-java-ep-sdk-vqzIegV42yFnHGujHH8DqjWWyPE.jar')} {
+    include 'org/kaaproject/kaa/client/*.class'
+    include 'org/kaaproject/kaa/schema/sample/*.class'
+  }
+
+  from { locateJar('slf4j-simple-1.7.21.jar')} {
+    include 'org/slf4j/Logger.class'
+    include 'org/slf4j/LoggerFactory.class'
+  }
+
+  from { locateJar('pi4j-core.jar')} {
+    include 'com/pi4j/io/gpio/**/*'
+    include 'com/pi4j/io/spi/SpiChannel.class'
+  }
+
+  from { locateJar('pi4j-core.jar')} {
+    include 'com/pi4j/gpio/extension/base/AdcGpioProvider.class'
+    include 'com/pi4j/gpio/extension/mcp/MCP3008GpioProvider.class'
+    include 'com/pi4j/gpio/extension/mcp/MCP3008Pin.class'
+  }
+
+  from { locateJar('gson-2.6.2.jar') } {
+    include 'com/google/gson/**.*.class'
+  }
+
+  with jar
+
 }
 
 //task fatJarUSB(type: Jar) {
@@ -69,9 +109,6 @@ task fatJarGPIO(type: Jar) {
 //    }
 //}
 //
-//def locateJar(lib) {
-//    configurations.compile.findAll {it.getName().contains(lib)}.collect { it.isDirectory() ? it : zipTree(it) }
-//}
 //
 //task fatJarUSB2(type: Jar) {
 //    manifest {
