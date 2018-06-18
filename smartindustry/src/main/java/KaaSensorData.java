@@ -60,7 +60,7 @@ public class KaaSensorData {
         try {
             provider = new MCP3008GpioProvider(SpiChannel.CS0);
         } catch (IOException e) {
-            System.out.println("hey");
+            System.out.println("IOException occured!");
         }
 
         input0 = gpio.provisionAnalogInputPin(provider, MCP3008Pin.CH0, "MyAnalogInput-CH0");
@@ -127,6 +127,10 @@ public class KaaSensorData {
 
     private static double getInput2Value() {
         return input2.getValue();
+    }
+
+    private static double getApiValue() {
+      new httpconnectionobjectding();
     }
 
     private static void onKaaStarted(long time) {
