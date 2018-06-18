@@ -66,8 +66,8 @@ task fatJar(type: Jar) {
   baseName = project.name
 
   from { locateJar('kaa-java-ep-sdk-vqzIegV42yFnHGujHH8DqjWWyPE.jar')} {
-    include 'org/kaaproject/kaa/client/*.class'
-    include 'org/kaaproject/kaa/schema/sample/*.class'
+    include 'org/kaaproject/kaa/client/**/*'
+    include 'org/kaaproject/kaa/schema/sample/**/*'
   }
 
   from { locateJar('slf4j-simple-1.7.21.jar')} {
