@@ -71,8 +71,7 @@ task fatJar(type: Jar) {
   }
 
   from { locateJar('slf4j-simple-1.7.21.jar')} {
-    include 'org/slf4j/Logger.class'
-    include 'org/slf4j/LoggerFactory.class'
+    include 'org/slf4j/**/*'
   }
 
   from { locateJar('pi4j-core.jar')} {
