@@ -1,0 +1,1 @@
+cmd_/home/pi/micro/assignment3/helloworld/hello-1.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/pi/micro/assignment3/helloworld/hello-1.ko /home/pi/micro/assignment3/helloworld/hello-1.o /home/pi/micro/assignment3/helloworld/hello-1.mod.o ;  true
